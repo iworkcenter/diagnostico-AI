@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I WORK Centro de Experiencia de AI · Potenciando Humanos</title>
+<meta name="description" content="5 preguntas. 3 minutos. Descubre si tu empresa puede adoptar Inteligencia Artificial ahora o qué necesita resolver primero.">
+<meta property="og:title" content="I WORK Centro de Experiencia de AI · Potenciando Humanos">
+<meta property="og:description" content="Diagnóstico gratuito de adopción IA — 5 preguntas que el mercado no está haciendo.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #08090f;
+  --surface: #0e0f1a;
+  --card:    #13141f;
+  --border:  rgba(255,255,255,.07);
+  --border2: rgba(255,255,255,.12);
+  --accent:  #c084fc;
+  --accent2: #a855f7;
+  --warn:    #f59e0b;
+  --danger:  #ef4444;
+  --text:    rgba(255,255,255,.92);
+  --muted:   rgba(255,255,255,.45);
+  --faint:   rgba(255,255,255,.08);
+  --r: 8px;
+  --r2: 16px;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE + GRID BG ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -5%, rgba(192,132,252,.09) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 90% 80%, rgba(168,85,247,.05) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ── HEADER ── */
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 56px;
+}
+.logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px #c084fc;
+  animation: blink 2.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  border: 1px solid rgba(192,132,252,.25);
+  color: var(--accent);
+  background: rgba(192,132,252,.05);
+}
+
+/* ── HERO ── */
+.hero { margin-bottom: 56px; }
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-tag::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(0,229,160,.3), transparent);
+}
+.hero-h {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 6vw, 58px);
+  font-weight: 800; line-height: 1.05;
+  color: var(--text); margin-bottom: 20px;
+  letter-spacing: -.02em;
+}
+.hero-h span { color: var(--accent); }
+.hero-p {
+  font-size: 15px; color: var(--muted); line-height: 1.7;
+  max-width: 520px; margin-bottom: 32px;
+}
+.hero-stats {
+  display: flex; gap: 32px; flex-wrap: wrap;
+}
+.stat {
+  display: flex; align-items: center; gap: 10px;
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--text);
+}
+.stat-lbl {
+  font-size: 11px; color: var(--muted); line-height: 1.4;
+}
+
+/* ── PROGRESS ── */
+.progress-section { margin-bottom: 36px; }
+.prog-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.prog-steps {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--muted); letter-spacing: .08em;
+}
+.prog-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--accent);
+}
+.prog-track {
+  height: 2px;
+  background: var(--faint);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%; width: 0%;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 0 8px rgba(192,132,252,.5);
+}
+
+/* ── QUESTION CARD ── */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 32px;
+  margin-bottom: 16px;
+  animation: slideUp .35s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.q-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px;
+}
+.q-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 600;
+  color: var(--text); line-height: 1.35;
+  margin-bottom: 14px;
+}
+.q-context {
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+  padding: 12px 16px;
+  background: var(--faint);
+  border-radius: var(--r);
+  border-left: 2px solid rgba(192,132,252,.4);
+  margin-bottom: 24px;
+}
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  cursor: pointer;
+  transition: all .2s;
+  background: transparent;
+  text-align: left; width: 100%;
+  position: relative; overflow: hidden;
+}
+.opt::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(192,132,252,.04);
+  opacity: 0; transition: opacity .2s;
+}
+.opt:hover { border-color: rgba(192,132,252,.4); }
+.opt:hover::before { opacity: 1; }
+.opt.selected {
+  border-color: var(--accent);
+  background: rgba(192,132,252,.07);
+}
+.opt-radio {
+  width: 20px; height: 20px; min-width: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.2);
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; flex-shrink: 0;
+}
+.opt.selected .opt-radio {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.opt-radio-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bg);
+  transform: scale(0); transition: transform .2s;
+}
+.opt.selected .opt-radio-dot { transform: scale(1); }
+.opt-text { font-size: 14px; color: var(--text); line-height: 1.55; }
+
+/* ── NAV ── */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.btn-back {
+  display: flex; align-items: center; gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: 13px; padding: 12px 20px; border-radius: var(--r);
+  cursor: pointer; transition: all .2s;
+}
+.btn-back:hover { border-color: var(--border2); color: var(--text); }
+.btn-next {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--accent); color: var(--bg);
+  font-family: 'Syne', sans-serif; font-weight: 600;
+  font-size: 13px; padding: 12px 24px; border-radius: var(--r);
+  border: none; cursor: pointer;
+  transition: all .2s; opacity: .3; pointer-events: none;
+}
+.btn-next.on { opacity: 1; pointer-events: all; }
+.btn-next.on:hover { background: #e0aaff; transform: translateY(-1px); }
+
+/* ── RESULT ── */
+.result { display: none; animation: slideUp .4s ease; }
+.result.show { display: block; }
+
+.result-top {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 40px 32px 32px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.meter-wrap { margin-bottom: 32px; position: relative; }
+.meter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
+}
+.meter-arc {
+  width: 200px; height: 100px;
+  margin: 0 auto 16px;
+  position: relative;
+}
+.meter-arc svg { width: 200px; height: 100px; overflow: visible; }
+.needle {
+  transform-origin: 100px 96px;
+  transition: transform 1.2s cubic-bezier(.34,1.2,.64,1);
+}
+.meter-score {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px; font-weight: 800;
+  line-height: 1; margin-bottom: 4px;
+}
+.meter-max {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--muted);
+}
+.result-badge-wrap { margin-bottom: 20px; }
+.result-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px;
+  font-weight: 500;
+}
+.result-h {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 700;
+  line-height: 1.2; margin-bottom: 12px;
+}
+.result-p {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.75; max-width: 500px;
+  margin: 0 auto;
+}
+
+/* BARS */
+.dimensions {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 28px;
+  margin-bottom: 16px;
+}
+.dim-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
+}
+.dim-item { margin-bottom: 16px; }
+.dim-item:last-child { margin-bottom: 0; }
+.dim-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.dim-name { font-size: 13px; color: var(--text); font-weight: 500; }
+.dim-score { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+.dim-track {
+  height: 4px; background: var(--faint); border-radius: 2px; overflow: hidden;
+}
+.dim-fill {
+  height: 4px; border-radius: 2px;
+  width: 0%; transition: width 1s cubic-bezier(.4,0,.2,1);
+}
+
+/* ACTIONS */
+.actions {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 28px;
+  margin-bottom: 16px;
+}
+.actions-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 600;
+  margin-bottom: 16px;
+}
+.action-item {
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.action-item:last-child { border-bottom: none; padding-bottom: 0; }
+.action-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--accent);
+  min-width: 20px; padding-top: 2px;
+}
+.action-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.action-text strong { color: var(--text); font-weight: 500; }
+
+/* CTA BLOCK */
+.cta-block {
+  background: linear-gradient(135deg, rgba(192,132,252,.08) 0%, rgba(192,132,252,.02) 100%);
+  border: 1px solid rgba(192,132,252,.25);
+  border-radius: var(--r2);
+  padding: 32px;
+  text-align: center;
+}
+.cta-h {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700; margin-bottom: 8px;
+}
+.cta-p { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: var(--bg);
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 14px; padding: 14px 32px;
+  border-radius: var(--r); border: none; cursor: pointer;
+  transition: all .2s; text-decoration: none;
+}
+.btn-cta:hover { background: #e0aaff; transform: translateY(-2px); }
+.btn-restart {
+  display: block; margin: 16px auto 0;
+  font-size: 12px; color: var(--muted);
+  background: none; border: none; cursor: pointer; text-decoration: underline;
+}
+.btn-restart:hover { color: var(--text); }
+
+/* Footer */
+.foot {
+  margin-top: 56px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.foot-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+}
+.foot-legal { font-size: 10px; color: rgba(255,255,255,.2); }
+
+/* Responsive */
+@media(max-width:480px){
+  .q-card, .result-top, .dimensions, .actions, .cta-block { padding: 24px 20px; }
+  .hero-h { font-size: 34px; }
+  .meter-score { font-size: 40px; }
+  .hero-stats { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      I WORK · Centro de Experiencia de AI
+    </div>
+    <div class="badge">Diagnóstico IA · Gratuito</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero" id="heroSection">
+    <div class="hero-tag">I WORK · Centro de Experiencia de AI · Potenciando Humanos</div>
+    <h1 class="hero-h">¿Tu empresa está<br>lista para la <span>AI</span>?</h1>
+    <p class="hero-p">El mercado está lleno de vendedores de Inteligencia Artificial. Nosotros hacemos la pregunta que nadie hace: <strong style="color:rgba(255,255,255,.75)">¿tienes la base para adoptarla responsablemente?</strong></p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-lbl">Preguntas<br>clave</div>
+      </div>
+      <div style="width:1px;background:var(--border);height:36px;align-self:center"></div>
+      <div class="stat">
+        <div class="stat-num">3'</div>
+        <div class="stat-lbl">Minutos<br>promedio</div>
+      </div>
+      <div style="width:1px;background:var(--border);height:36px;align-self:center"></div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">Gratuito<br>sin registro</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-section" id="progressSection">
+    <div class="prog-header">
+      <div class="prog-steps" id="progSteps">Pregunta 1 de 5</div>
+      <div class="prog-pct" id="progPct">0%</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="questionArea"></div>
+
+  <!-- RESULT -->
+  <div class="result" id="resultSection"></div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div class="foot-brand">I WORK · Centro de Experiencia de AI · Potenciando Humanos · Colombia 2026</div>
+    <div class="foot-legal">Diagnóstico orientativo. No almacenamos datos.</div>
+  </div>
+
+</div>
+
+<script>
+const Q = [
+  {
+    id: 1,
+    dimension: "Infraestructura de datos",
+    text: "¿Tu empresa tiene sus datos organizados y accesibles en un sistema central?",
+    context: "La IA necesita datos para funcionar. Sin datos limpios y estructurados, cualquier implementación está condenada al fracaso antes de empezar.",
+    opts: [
+      { t: "Sí — tenemos sistema centralizado y datos bien organizados.", s: 3 },
+      { t: "Parcialmente — hay datos dispersos pero algo centralizado.", s: 1 },
+      { t: "No — trabajamos con Excel, WhatsApp o sin sistema claro.", s: 0 }
+    ]
+  },
+  {
+    id: 2,
+    dimension: "Cultura de cambio",
+    text: "¿Tu equipo tiene una cultura mínima de adopción tecnológica?",
+    context: "El mayor freno de la IA no es la tecnología — es la gente. Un equipo resistente al cambio puede destruir la mejor implementación del mundo.",
+    opts: [
+      { t: "Sí — adoptamos herramientas nuevas con facilidad.", s: 3 },
+      { t: "Hay resistencia en algunas áreas pero voluntad de avanzar.", s: 1 },
+      { t: "Mucha resistencia. Pocos cambios tecnológicos previos.", s: 0 }
+    ]
+  },
+  {
+    id: 3,
+    dimension: "Claridad del problema",
+    text: "¿Conoces con claridad el problema concreto que quieres resolver con IA?",
+    context: "Implementar IA 'porque todos lo hacen' es la razón número uno de fracaso. La IA debe resolver un dolor específico y medible, no una idea general.",
+    opts: [
+      { t: "Sí — tenemos un problema claro, medible y urgente.", s: 3 },
+      { t: "Tenemos idea general pero sin caso de uso definido.", s: 1 },
+      { t: "Queremos IA pero no sabemos bien para qué específicamente.", s: 0 }
+    ]
+  },
+  {
+    id: 4,
+    dimension: "Postura de ciberseguridad",
+    text: "¿Tu empresa tiene una postura definida frente a la ciberseguridad y la privacidad de datos?",
+    context: "Este es el miedo más legítimo del mercado. Si manejas datos sensibles de clientes o información estratégica, la ciberseguridad no es opcional — es el paso previo.",
+    opts: [
+      { t: "Sí — políticas de seguridad, contratos y control de accesos.", s: 3 },
+      { t: "Algo básico pero con brechas que reconocemos.", s: 1 },
+      { t: "Sin política clara y con preocupación real por la seguridad.", s: 0 }
+    ]
+  },
+  {
+    id: 5,
+    dimension: "Liderazgo interno",
+    text: "¿Existe un líder interno con autoridad y tiempo para liderar la transformación?",
+    context: "Los proyectos de IA sin un responsable interno claro mueren a los 3 meses. No importa qué tan bueno sea el proveedor si nadie dentro impulsa el cambio.",
+    opts: [
+      { t: "Sí — hay un responsable con tiempo asignado y respaldo directivo.", s: 3 },
+      { t: "Hay interés directivo pero sin responsable específico.", s: 1 },
+      { t: "Dependemos completamente del proveedor externo.", s: 0 }
+    ]
+  }
+];
+
+const RESULTS = [
+  {
+    min: 12, max: 15,
+    label: "Lista para volar",
+    labelBg: "rgba(192,132,252,.12)", labelColor: "#c084fc",
+    scoreColor: "#c084fc",
+    barColor: "#c084fc",
+    title: "Tu empresa puede adoptar IA ahora mismo.",
+    desc: "Tienes los cimientos correctos: datos organizados, equipo dispuesto, un problema claro, seguridad básica y liderazgo interno. El riesgo de fracaso es bajo y el potencial de impacto es muy alto.",
+    actions: [
+      { strong: "Inicia un proyecto piloto", rest: " focalizado en las próximas 4 a 8 semanas — elige un caso de uso de alto impacto y baja complejidad." },
+      { strong: "Define métricas de éxito antes de empezar", rest: " — sin ellas no sabrás si la IA realmente funcionó para tu negocio." },
+      { strong: "Solicita un diagnóstico profundo", rest: " con nuestro equipo para identificar cuál es la herramienta de IA más adecuada para tu caso específico." }
+    ],
+    cta: "Agenda tu sesión de implementación →"
+  },
+  {
+    min: 7, max: 11,
+    label: "En construcción",
+    labelBg: "rgba(245,158,11,.12)", labelColor: "#f59e0b",
+    scoreColor: "#f59e0b",
+    barColor: "#f59e0b",
+    title: "Estás a mitad del camino.",
+    desc: "Hay buenas bases, pero existen brechas que harán que cualquier implementación de IA sea costosa, lenta o fallida si no se resuelven primero. La buena noticia: con preparación adecuada, en 60-90 días puedes estar lista.",
+    actions: [
+      { strong: "Identifica tu brecha crítica", rest: " — datos, cultura, seguridad o liderazgo. Resuélvela antes de invertir en tecnología." },
+      { strong: "No contrates IA todavía", rest: " — contrata primero la consultoría previa que construya la base correcta." },
+      { strong: "Solicita una hoja de ruta personalizada", rest: " con BPOS LATAM para saber exactamente qué resolver y en qué orden." }
+    ],
+    cta: "Construye tu hoja de ruta con nosotros →"
+  },
+  {
+    min: 0, max: 6,
+    label: "Necesitas base primero",
+    labelBg: "rgba(239,68,68,.12)", labelColor: "#ef4444",
+    scoreColor: "#ef4444",
+    barColor: "#ef4444",
+    title: "Tu empresa aún no está lista para la IA.",
+    desc: "Y eso no es un problema — es información valiosa. Implementar IA ahora sería como construir el piso 10 sin los primeros 9. El resultado sería inversión perdida y mucha frustración. Existe una ruta clara y accesible para llegar al punto de adopción.",
+    actions: [
+      { strong: "Antes de IA necesitas resolver", rest: " estructura de datos, procesos básicos y cultura digital. En ese orden." },
+      { strong: "El miedo a la ciberseguridad es válido", rest: " — no lo ignores. Abórdalo con un experto antes de cualquier implementación tecnológica." },
+      { strong: "No es cuestión de si, sino de cuándo y cómo", rest: " — hablemos sobre el camino correcto para tu tipo de negocio." }
+    ],
+    cta: "Hablar con un experto en preparación para IA →"
+  }
+];
+
+let cur = 0, answers = Array(5).fill(null);
+
+function render() {
+  const q = Q[cur];
+  const pct = Math.round((cur / 5) * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progSteps').textContent = 'Pregunta ' + (cur + 1) + ' de 5';
+  document.getElementById('progPct').textContent = pct + '%';
+
+  document.getElementById('questionArea').innerHTML = `
+    <div class="q-card">
+      <div class="q-label">Pregunta 0${cur + 1} · ${q.dimension}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-context">${q.context}</div>
+      <div class="options">
+        ${q.opts.map((o, i) => `
+          <button class="opt${answers[cur] === i ? ' selected' : ''}" onclick="pick(${i})">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-text">${o.t}</div>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="back()" style="${cur === 0 ? 'visibility:hidden' : ''}">← Anterior</button>
+      <button class="btn-next${answers[cur] !== null ? ' on' : ''}" id="btnN" onclick="next()">
+        ${cur === 4 ? 'Ver mi diagnóstico →' : 'Siguiente →'}
+      </button>
+    </div>
+  `;
+}
+
+function pick(i) {
+  answers[cur] = i;
+  document.querySelectorAll('.opt').forEach((el, idx) => el.classList.toggle('selected', idx === i));
+  document.getElementById('btnN').classList.add('on');
+}
+
+function next() {
+  if (answers[cur] === null) return;
+  if (cur < 4) { cur++; render(); }
+  else showResult();
+}
+
+function back() {
+  if (cur > 0) { cur--; render(); }
+}
+
+function showResult() {
+  const total = answers.reduce((s, a, i) => s + (a !== null ? Q[i].opts[a].s : 0), 0);
+  const pct = Math.round((total / 15) * 100);
+  const R = RESULTS.find(r => total >= r.min && total <= r.max);
+  const dimScores = answers.map((a, i) => a !== null ? Q[i].opts[a].s : 0);
+
+  document.getElementById('progFill').style.width = '100%';
+  document.getElementById('progSteps').textContent = 'Diagnóstico completo';
+  document.getElementById('progPct').textContent = '100%';
+  document.getElementById('questionArea').innerHTML = '';
+  document.getElementById('heroSection').style.display = 'none';
+
+  const deg = -90 + (pct / 100) * 180;
+
+  document.getElementById('resultSection').innerHTML = `
+    <div class="result-top">
+      <div class="meter-label">Índice de preparación para IA</div>
+      <div class="meter-arc">
+        <svg viewBox="0 0 200 100">
+          <defs>
+            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ef4444"/>
+              <stop offset="50%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#c084fc"/>
+            </linearGradient>
+          </defs>
+          <path d="M 14 96 A 86 86 0 0 1 186 96" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="8" stroke-linecap="round"/>
+          <path d="M 14 96 A 86 86 0 0 1 186 96" fill="none" stroke="url(#arcGrad)" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+          <g class="needle" id="needle" style="transform: rotate(${-90}deg)">
+            <line x1="100" y1="96" x2="100" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+            <circle cx="100" cy="96" r="5" fill="white" opacity="0.9"/>
+          </g>
+        </svg>
+      </div>
+      <div class="meter-score" style="color:${R.scoreColor}">${pct}<span style="font-size:24px;font-weight:400;color:var(--muted)">%</span></div>
+      <div class="meter-max" style="margin-bottom:20px">Puntuación: ${total} / 15</div>
+      <div class="result-badge-wrap">
+        <div class="result-badge" style="background:${R.labelBg};color:${R.labelColor};border:1px solid ${R.labelColor}40">
+          <div style="width:6px;height:6px;border-radius:50%;background:${R.labelColor}"></div>
+          ${R.label}
+        </div>
+      </div>
+      <div class="result-h">${R.title}</div>
+      <div class="result-p">${R.desc}</div>
+    </div>
+
+    <div class="dimensions">
+      <div class="dim-title">Resultado por dimensión</div>
+      ${Q.map((q, i) => {
+        const s = dimScores[i];
+        const pctDim = Math.round((s / 3) * 100);
+        const col = s === 3 ? '#00e5a0' : s === 1 ? '#f59e0b' : '#ef4444';
+        const lbl = s === 3 ? 'Fortaleza' : s === 1 ? 'En proceso' : 'Brecha crítica';
+        return `
+          <div class="dim-item">
+            <div class="dim-header">
+              <div class="dim-name">${q.dimension}</div>
+              <div class="dim-score" style="color:${col}">${lbl}</div>
+            </div>
+            <div class="dim-track">
+              <div class="dim-fill" data-w="${pctDim}" style="background:${col}"></div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+
+    <div class="actions">
+      <div class="actions-title">Tus próximos pasos recomendados</div>
+      ${R.actions.map((a, i) => `
+        <div class="action-item">
+          <div class="action-num">0${i + 1}</div>
+          <div class="action-text"><strong>${a.strong}</strong>${a.rest}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-h">¿Quieres un diagnóstico profundo y personalizado?</div>
+      <div class="cta-p">Este test te da una orientación. Una sesión con nuestro equipo te da un plan de acción real, adaptado a tu industria y tamaño de empresa.</div>
+      <a class="btn-cta" href="https://wa.me/573181753856?text=Hice%20el%20diagnóstico%20de%20IA%20y%20quiero%20hablar%20con%20un%20experto%20de%20BPOS%20LATAM" target="_blank">${R.cta}</a>
+      <button class="btn-restart" onclick="restart()">Reiniciar diagnóstico</button>
+    </div>
+  `;
+
+  document.getElementById('resultSection').classList.add('show');
+
+  setTimeout(() => {
+    const needle = document.getElementById('needle');
+    if (needle) needle.style.transform = `rotate(${deg}deg)`;
+    document.querySelectorAll('.dim-fill').forEach(el => {
+      el.style.width = el.dataset.w + '%';
+    });
+  }, 200);
+}
+
+function restart() {
+  cur = 0; answers = Array(5).fill(null);
+  const r = document.getElementById('resultSection');
+  r.classList.remove('show'); r.innerHTML = '';
+  document.getElementById('heroSection').style.display = 'block';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
